@@ -7,7 +7,10 @@ package inventory.pl.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -42,8 +46,17 @@ public class ProductItems implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product")
     private Product product;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "productItem")
+    private List<FeatureValue>featuresValues;
+    public List<FeatureValue> getFeaturesValues() {
+		return featuresValues;
+	}
 
-    public long getId() {
+	public void setFeaturesValues(List<FeatureValue> featuresValues) {
+		this.featuresValues = featuresValues;
+	}
+
+	public long getId() {
         return id;
     }
 

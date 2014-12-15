@@ -6,7 +6,6 @@
 package inventory.pl.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -53,6 +52,16 @@ public class Product implements Serializable {
     private Date createDate;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
     private List<ProductItems>productItems;
+    public List<Features> getProductFeatures() {
+		return productFeatures;
+	}
+
+	public void setProductFeatures(List<Features> productFeatures) {
+		this.productFeatures = productFeatures;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    private List<Features>productFeatures;
 
     public long getId() {
         return id;

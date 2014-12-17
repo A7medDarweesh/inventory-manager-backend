@@ -19,10 +19,10 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-//@Configuration
-//@EnableTransactionManagement
+@Configuration
+@EnableTransactionManagement
 //@EnableJpaRepositories(basePackages = {"inventory.pl.dao"}, entityManagerFactoryRef="enityMangerFactory")
-//@ComponentScan(basePackages = {"inventory.pl"})
+@ComponentScan(basePackages = {"inventory.pl"})
 public class JPAConfig {
 
     @Bean
@@ -40,7 +40,7 @@ public class JPAConfig {
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/psc");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/inventory");
         dataSource.setUsername("root");
         dataSource.setPassword("123456");
 
@@ -67,7 +67,8 @@ public class JPAConfig {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create");
+        //hibernateProperties.setProperty("hibernate.connection.datasource", "inventory");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
         return hibernateProperties;

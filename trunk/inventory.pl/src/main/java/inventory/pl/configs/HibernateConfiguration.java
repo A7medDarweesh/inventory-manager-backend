@@ -29,9 +29,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author ahmed_darweeesh
  */
-@Configuration
-@EnableTransactionManagement
-@ComponentScan(basePackages = {"inventory.pl"})
+//@Configuration
+//@EnableTransactionManagement
+//@ComponentScan(basePackages = {"inventory.pl"})
 public class HibernateConfiguration {
 
     @Bean

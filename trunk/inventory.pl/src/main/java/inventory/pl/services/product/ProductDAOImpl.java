@@ -7,11 +7,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaQuery;
+import org.springframework.stereotype.Repository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+@Repository("baseIMPL")
 @Transactional
 public class ProductDAOImpl implements ProductDAO {
 	  @PersistenceContext
@@ -49,7 +50,7 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public void addProduct(Product product) {
-		// TODO Auto-generated method stub
+		entityManager.persist(product);
 		
 	}
 	

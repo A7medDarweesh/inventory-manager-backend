@@ -40,7 +40,7 @@ public class ProductItems implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     private String code;
-    @Column(name="creation_date", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name="creation_date")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date creationeDate;
     @ManyToOne

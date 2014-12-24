@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-//@EnableJpaRepositories(basePackages = {"inventory.pl.dao"}, entityManagerFactoryRef="enityMangerFactory")
+@EnableJpaRepositories(basePackages = {"inventory.pl.dao"}, entityManagerFactoryRef="enityMangerFactory")
 @ComponentScan(basePackages = {"inventory.pl"})
 public class JPAConfig {
 

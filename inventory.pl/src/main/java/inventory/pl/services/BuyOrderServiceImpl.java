@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BuyOrderServiceImpl implements BuyOrderService {
 
-    @Autowired
-    SessionFactory sessionFactory;
+//    @Autowired
+//    SessionFactory sessionFactory;
 
     @Transactional
     public void save(BuyOrder entity) {
-        Session session = sessionFactory.getCurrentSession();
-        session.save(entity);
+//        Session session = sessionFactory.getCurrentSession();
+//        session.save(entity);
     }
 
 }

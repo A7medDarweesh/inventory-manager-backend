@@ -6,10 +6,13 @@
 
 package inventory.pl.services;
 
+import inventory.pl.services.product.ProductService;
+
 /**
  *
  * @author ahmed_darweeesh
  */
 public interface BaseServiceManager {
    BuyOrderService getBuyOrderSrervice();
+    ProductService getProductService();
 }

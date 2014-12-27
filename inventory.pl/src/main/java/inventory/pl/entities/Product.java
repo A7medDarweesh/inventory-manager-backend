@@ -52,6 +52,9 @@ public class Product implements Serializable {
     private Date createDate;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
     private List<ProductItems>productItems;
+    
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    private List<Features>productFeatures;
     public List<Features> getProductFeatures() {
 		return productFeatures;
 	}
@@ -60,8 +63,6 @@ public class Product implements Serializable {
 		this.productFeatures = productFeatures;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    private List<Features>productFeatures;
 
     public long getId() {
         return id;

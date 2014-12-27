@@ -7,6 +7,7 @@
 package inventory.pl.services;
 
 import inventory.pl.services.product.ProductService;
+import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -14,12 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author ahmed_darweeesh
  */
 
-public class ServiceManager implements BaseServiceManager{
+public class ServiceManager implements BaseServiceManager,Serializable{
     
     @Autowired
     BuyOrderService buyOrderSrervice;
     @Autowired
     ProductService productService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    WarehousesService warehousesService;
 
    
     @Override
@@ -30,6 +35,11 @@ public class ServiceManager implements BaseServiceManager{
     @Override
     public ProductService getProductService() {
         return productService;
+    }
+
+    @Override
+    public WarehousesService getwWarehousesService() {
+        return warehousesService;
     }
     
     

@@ -8,7 +8,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 public class ConfigLoader {
 
     public static ServiceManager getServiceManager() {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(HibernateConfiguration.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(JPAConfig.class);
         ServiceManager manager = ctx.getBean(ServiceManager.class);
         return manager;
     }

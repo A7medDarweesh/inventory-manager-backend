@@ -15,4 +15,5 @@ import inventory.pl.services.product.ProductService;
 public interface BaseServiceManager {
    BuyOrderService getBuyOrderSrervice();
     ProductService getProductService();
+    WarehousesService getwWarehousesService();
 }

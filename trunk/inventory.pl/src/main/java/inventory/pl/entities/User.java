@@ -64,4 +64,12 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }

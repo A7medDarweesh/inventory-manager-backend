@@ -29,7 +29,7 @@ public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean enityMangerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        emf.setDataSource(dataSource());
+        //emf.setDataSource(dataSource());
         emf.setPackagesToScan(new String[]{"inventory.pl"});
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
@@ -37,7 +37,7 @@ public class JPAConfig {
         return emf;
     }
 
-    @Bean
+   // @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -68,7 +68,7 @@ public class JPAConfig {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //hibernateProperties.setProperty("hibernate.connection.datasource", "inventory");
+        hibernateProperties.setProperty("hibernate.connection.datasource", "inventory");
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");

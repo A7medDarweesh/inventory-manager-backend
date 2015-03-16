@@ -54,7 +54,9 @@ public class BackupService {
             File outArchive = new File(outputFile);
             archive(outArchive);
         } else {
-            pool.invoke(new MultiCoreArchiver(0, entries.size() - 1, entries));
+            //pool.invoke(new MultiCoreArchiver(0, entries.size() - 1, entries));
+            File outArchive = new File(outputFile);
+            archive(outArchive);
         }
         long endTime = System.currentTimeMillis();
         System.out.println("finished execution in" + (endTime - startTime) / 1000 + " secs");
@@ -244,9 +246,10 @@ public class BackupService {
                 System.out.println("creating frok with params:" + start + " :" + mid + " :" + end);
                 MultiCoreArchiver left = new MultiCoreArchiver(start, mid, fileEntirs);
                 MultiCoreArchiver right = new MultiCoreArchiver(mid, end, fileEntirs);
-                left.fork();
-                right.compute();
-                left.join();
+                invokeAll(left,right);
+//                left.fork();
+//                right.compute();
+//                left.join();
             }
             return null;
         }

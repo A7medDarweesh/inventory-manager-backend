@@ -17,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -41,6 +43,14 @@ public class NeedsRequest implements Serializable {
     private Date requestDate;
     @Column
     private RequestStatus status;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
+    @ManyToMany
+    @JoinTable(name = "request_product_xref",
+            joinColumns = {@JoinColumn(name = "request_id")},
+            inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    private List<Product>productList;
     
 
     public Long getId() {

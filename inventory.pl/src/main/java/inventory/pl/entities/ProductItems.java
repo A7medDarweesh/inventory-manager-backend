@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -40,23 +41,31 @@ public class ProductItems implements Serializable {
     @NotNull
     @Size(min = 1, max = 255)
     private String code;
-    @Column(name="creation_date")
+    @Column(name = "creation_date")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date creationeDate;
     @ManyToOne
     @JoinColumn(name = "product")
     private Product product;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "productItem")
-    private List<FeatureValue>featuresValues;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productItem")
+    private List<FeatureValue> featuresValues;
+    @ManyToMany(mappedBy = "products")
+    private List<InventoryOut> outMoves;
+    @ManyToMany(mappedBy = "products")
+    private List<InventoryIn> inMoves;
+    @ManyToOne
+    @JoinColumn(name = "warehouse")
+    private Warehouse warehouse;
+
     public List<FeatureValue> getFeaturesValues() {
-		return featuresValues;
-	}
+        return featuresValues;
+    }
 
-	public void setFeaturesValues(List<FeatureValue> featuresValues) {
-		this.featuresValues = featuresValues;
-	}
+    public void setFeaturesValues(List<FeatureValue> featuresValues) {
+        this.featuresValues = featuresValues;
+    }
 
-	public long getId() {
+    public long getId() {
         return id;
     }
 
@@ -86,6 +95,30 @@ public class ProductItems implements Serializable {
 
     public void setCreationeDate(Date creationeDate) {
         this.creationeDate = creationeDate;
+    }
+
+    public List<InventoryOut> getOutMoves() {
+        return outMoves;
+    }
+
+    public void setOutMoves(List<InventoryOut> outMoves) {
+        this.outMoves = outMoves;
+    }
+
+    public List<InventoryIn> getInMoves() {
+        return inMoves;
+    }
+
+    public void setInMoves(List<InventoryIn> inMoves) {
+        this.inMoves = inMoves;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 
 }

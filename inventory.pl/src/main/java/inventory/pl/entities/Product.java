@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -50,19 +51,21 @@ public class Product implements Serializable {
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    private List<ProductItems>productItems;
-    
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    private List<Features>productFeatures;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<ProductItems> productItems;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<Features> productFeatures;
+    @ManyToMany(mappedBy = "productList")
+    List<NeedsRequest>requests;
+//    @ManyToMany(mappedBy = "productList")
+//    List<Procurement>procurements;
     public List<Features> getProductFeatures() {
-		return productFeatures;
-	}
+        return productFeatures;
+    }
 
-	public void setProductFeatures(List<Features> productFeatures) {
-		this.productFeatures = productFeatures;
-	}
-
+    public void setProductFeatures(List<Features> productFeatures) {
+        this.productFeatures = productFeatures;
+    }
 
     public long getId() {
         return id;
@@ -103,6 +106,5 @@ public class Product implements Serializable {
     public void setProductItems(List<ProductItems> productItems) {
         this.productItems = productItems;
     }
-    
 
 }

@@ -36,7 +36,7 @@ public class JPAConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean enityMangerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
-        //emf.setDataSource(dataSource());
+        if( !env.getProperty("inventory.datasource.enabled").equals("true")){emf.setDataSource(dataSource());}
         emf.setPackagesToScan(new String[]{"inventory.pl"});
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         emf.setJpaVendorAdapter(vendorAdapter);
@@ -47,10 +47,10 @@ public class JPAConfig {
     // @Bean
     public DataSource dataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/inventory");
-        dataSource.setUsername("root");
-        dataSource.setPassword("123456");
+        dataSource.setDriverClassName(env.getProperty("inventory.datasource.driver"));
+        dataSource.setUrl(env.getProperty("inventory.datasource.url"));
+        dataSource.setUsername(env.getProperty("inventory.datasource.user"));
+        dataSource.setPassword(env.getProperty("inventory.datasource.password"));
         
         return dataSource;
     }
@@ -69,7 +69,7 @@ public class JPAConfig {
     
     final Properties additionalProperties() {
         final Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.connection.datasource", env.getProperty("inventory.datasource.name"));
+       if( env.getProperty("inventory.datasource.enabled").equals("true")){ hibernateProperties.setProperty("hibernate.connection.datasource", env.getProperty("inventory.datasource.name"));}
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");

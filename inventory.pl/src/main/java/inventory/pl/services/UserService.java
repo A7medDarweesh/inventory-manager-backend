@@ -10,7 +10,10 @@ import inventory.pl.dao.RoleRepostiroy;
 import inventory.pl.dao.UserRepository;
 import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
+import inventory.pl.exceptions.InvaliDloginEcxeption;
+
 import java.util.List;
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +52,12 @@ public class UserService {
         for(int i=1;i<users.size();i++){
             userRepository.delete(users.get(i));
         }
+    }
+    public User login(String name,String password) throws InvaliDloginEcxeption{
+    	User loggingUser=userRepository.findByNameAndPassword(name, password);
+    	if(loggingUser==null){
+    		throw new InvaliDloginEcxeption("User name or password is wrong");
+    	}
+    	return loggingUser;
     }
 }

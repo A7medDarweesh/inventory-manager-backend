@@ -8,6 +8,8 @@ package inventory.pl.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +17,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,8 +31,12 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
-    @Id
+ 
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3277223662974891760L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -37,10 +45,25 @@ public class User implements Serializable {
     private Date joinDate;
     @Column
     private String name;
+    @Column
+    private String password;
      @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-    public Integer getId() {
+     @ManyToMany
+     @JoinTable(name="users_porjects_xref",
+     	joinColumns={ @JoinColumn(name="user_id",referencedColumnName="id")},
+     	inverseJoinColumns = { @JoinColumn(name = "project_id") })
+    private  List<Project>projects;
+    public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -71,5 +94,19 @@ public class User implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
+
+	/**
+	 * @return the passwrod
+	 */
+	public String getPasswrod() {
+		return password;
+	}
+
+	/**
+	 * @param passwrod the passwrod to set
+	 */
+	public void setPasswrod(String passwrod) {
+		this.password = passwrod;
+	}
 
 }

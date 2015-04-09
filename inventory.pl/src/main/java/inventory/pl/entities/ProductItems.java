@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,7 +32,11 @@ import javax.validation.constraints.Size;
 @Entity
 public class ProductItems implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8015759928203779827L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -56,7 +61,12 @@ public class ProductItems implements Serializable {
     @ManyToOne
     @JoinColumn(name = "warehouse")
     private Warehouse warehouse;
-
+    @OneToOne
+    @JoinColumn(name = "request_details_id")
+	private RequestDetails request;
+    @OneToOne
+    @JoinColumn(name = "order_details_id")
+	private OrderDetails order;
     public List<FeatureValue> getFeaturesValues() {
         return featuresValues;
     }

@@ -55,6 +55,11 @@ public class User implements Serializable {
      	joinColumns={ @JoinColumn(name="user_id",referencedColumnName="id")},
      	inverseJoinColumns = { @JoinColumn(name = "project_id") })
     private  List<Project>projects;
+     @ManyToMany
+     @JoinTable(name="requests_watchers",
+     	joinColumns={ @JoinColumn(name="user_id",referencedColumnName="id")},
+     	inverseJoinColumns = { @JoinColumn(name = "request_id") })
+    private  List<NeedsRequest>watchedRequests;
     public List<Project> getProjects() {
 		return projects;
 	}

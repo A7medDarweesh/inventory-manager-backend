@@ -32,7 +32,11 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class NeedsRequest implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2593545438773861676L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -46,11 +50,8 @@ public class NeedsRequest implements Serializable {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-    @ManyToMany
-    @JoinTable(name = "request_product_xref",
-            joinColumns = {@JoinColumn(name = "request_id")},
-            inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    private List<Product>productList;
+   @OneToMany(cascade=CascadeType.ALL,mappedBy="request")
+    private List<RequestDetails>productList;
     
 
     public Long getId() {

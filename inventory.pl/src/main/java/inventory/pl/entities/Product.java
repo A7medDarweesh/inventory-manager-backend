@@ -5,9 +5,12 @@
  */
 package inventory.pl.entities;
 
+import inventory.pl.helpers.QuantityType;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,7 +35,11 @@ import javax.validation.constraints.Size;
 @Entity
 public class Product implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2207639837994592277L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -51,14 +58,14 @@ public class Product implements Serializable {
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
+    @Column(name="quantity_type")
+    QuantityType quantityType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<ProductItems> productItems;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Features> productFeatures;
     @ManyToMany(mappedBy = "productList")
     List<NeedsRequest>requests;
-//    @ManyToMany(mappedBy = "productList")
-//    List<Procurement>procurements;
     public List<Features> getProductFeatures() {
         return productFeatures;
     }

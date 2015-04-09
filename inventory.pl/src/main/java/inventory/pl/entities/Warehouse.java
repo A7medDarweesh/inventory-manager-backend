@@ -1,5 +1,6 @@
 package inventory.pl.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -18,9 +19,13 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "warehouse")
-public class Warehouse {
+public class Warehouse implements Serializable{
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8270947911060116688L;
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")

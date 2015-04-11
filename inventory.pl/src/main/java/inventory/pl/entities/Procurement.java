@@ -41,8 +41,9 @@ public class Procurement implements Serializable {
     @OneToOne
     @JoinColumn(name = "request_id")
     private NeedsRequest request;
-@OneToMany(cascade=CascadeType.ALL,mappedBy="roder")
-List<OrderDetails>details;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    List<OrderDetails> details;
+
     public long getId() {
         return id;
     }

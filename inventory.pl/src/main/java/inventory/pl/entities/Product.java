@@ -64,8 +64,6 @@ public class Product implements Serializable {
     private List<ProductItems> productItems;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Features> productFeatures;
-    @ManyToMany(mappedBy = "productList")
-    List<NeedsRequest>requests;
     public List<Features> getProductFeatures() {
         return productFeatures;
     }

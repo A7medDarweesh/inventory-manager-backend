@@ -12,6 +12,7 @@ import inventory.pl.entities.Features;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItems;
 import java.util.List;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,8 @@ public class ProductService {
     ProductRepository repository;
     @Autowired
     ProductItemRepository itemsRepository;
+    @Autowired
+    EntityManager manager;
 
     public void saveProduct(Product p) {
         //productDAO.addProduct(p);
@@ -51,6 +54,9 @@ public class ProductService {
     public void saveProductItem(ProductItems item){
         itemsRepository.save(item);
     }
+    public void updateProductItem(ProductItems item){
+        manager.merge(item);
+    }
     public List<Features>getProductFeatures(long id){
         Product p=repository.findOne(id);
         List<Features>fets=p.getProductFeatures();
@@ -68,5 +74,8 @@ public class ProductService {
         List<FeatureValue>vals=item.getFeaturesValues();
         vals.size();
         return vals;
+    }
+    public ProductItems getItem(long id){
+        return itemsRepository.findById(id);
     }
 }

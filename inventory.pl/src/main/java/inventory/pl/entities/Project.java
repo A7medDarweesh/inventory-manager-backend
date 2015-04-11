@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory.pl.entities;
 
 import java.io.Serializable;
@@ -32,12 +31,13 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "projects")
-public class Project implements Serializable{
-     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2601777682544742001L;
-	@Id
+public class Project implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = -2601777682544742001L;
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -53,35 +53,45 @@ public class Project implements Serializable{
     @Size(min = 1, max = 65535)
     @Column(name = "description")
     private String description;
-   @ManyToMany
-   @JoinTable(name="users_porjects_xref",
-   	joinColumns={ @JoinColumn(name="project_id",referencedColumnName="id")},
-   	inverseJoinColumns = { @JoinColumn(name = "user_id") })
-   private List<User>users;
-   @OneToMany(cascade=CascadeType.ALL,mappedBy="project")
-   List<Warehouse>warehouses;
-public Integer getId() {
-	return id;
-}
-public void setId(Integer id) {
-	this.id = id;
-}
-public String getName() {
-	return name;
-}
-public void setName(String name) {
-	this.name = name;
-}
-public String getDescription() {
-	return description;
-}
-public void setDescription(String description) {
-	this.description = description;
-}
-public List<User> getUsers() {
-	return users;
-}
-public void setUsers(List<User> users) {
-	this.users = users;
-}
+    @ManyToMany
+    @JoinTable(name = "users_porjects_xref",
+            joinColumns = {
+                @JoinColumn(name = "project_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "user_id")})
+    private List<User> users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
+    List<Warehouse> warehouses;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }

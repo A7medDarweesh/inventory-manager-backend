@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory.pl.entities;
 
 import java.io.Serializable;
@@ -31,12 +30,12 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
- 
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3277223662974891760L;
-	@Id
+     *
+     */
+    private static final long serialVersionUID = 3277223662974891760L;
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
@@ -47,28 +46,33 @@ public class User implements Serializable {
     private String name;
     @Column
     private String password;
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
-     @ManyToMany
-     @JoinTable(name="users_porjects_xref",
-     	joinColumns={ @JoinColumn(name="user_id",referencedColumnName="id")},
-     	inverseJoinColumns = { @JoinColumn(name = "project_id") })
-    private  List<Project>projects;
-     @ManyToMany
-     @JoinTable(name="requests_watchers",
-     	joinColumns={ @JoinColumn(name="user_id",referencedColumnName="id")},
-     	inverseJoinColumns = { @JoinColumn(name = "request_id") })
-    private  List<NeedsRequest>watchedRequests;
+    @ManyToMany
+    @JoinTable(name = "users_porjects_xref",
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "project_id")})
+    private List<Project> projects;
+    @ManyToMany
+    @JoinTable(name = "requests_watchers",
+            joinColumns = {
+                @JoinColumn(name = "user_id")},
+            inverseJoinColumns = {
+                @JoinColumn(name = "request_id")})
+    private List<NeedsRequest> watchedRequests;
+
     public List<Project> getProjects() {
-		return projects;
-	}
+        return projects;
+    }
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
-	}
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
+    }
 
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -100,18 +104,34 @@ public class User implements Serializable {
         this.role = role;
     }
 
-	/**
-	 * @return the passwrod
-	 */
-	public String getPasswrod() {
-		return password;
-	}
+    /**
+     * @return the passwrod
+     */
+    public String getPasswrod() {
+        return password;
+    }
 
-	/**
-	 * @param passwrod the passwrod to set
-	 */
-	public void setPasswrod(String passwrod) {
-		this.password = passwrod;
-	}
+    /**
+     * @param passwrod the passwrod to set
+     */
+    public void setPasswrod(String passwrod) {
+        this.password = passwrod;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public List<NeedsRequest> getWatchedRequests() {
+        return watchedRequests;
+    }
+
+    public void setWatchedRequests(List<NeedsRequest> watchedRequests) {
+        this.watchedRequests = watchedRequests;
+    }
 
 }

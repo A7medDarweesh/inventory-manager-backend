@@ -1,8 +1,10 @@
 package inventory.pl.services;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Component
+@Service
+@Transactional
 public class SearchService {
 
 }

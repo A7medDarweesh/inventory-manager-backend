@@ -61,7 +61,7 @@ public class Product implements Serializable {
     @Column(name="quantity_type")
     QuantityType quantityType;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
-    private List<ProductItems> productItems;
+    private List<ProductItem> productItems;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private List<Features> productFeatures;
     public List<Features> getProductFeatures() {
@@ -104,11 +104,11 @@ public class Product implements Serializable {
         this.createDate = createDate;
     }
 
-    public List<ProductItems> getProductItems() {
+    public List<ProductItem> getProductItems() {
         return productItems;
     }
 
-    public void setProductItems(List<ProductItems> productItems) {
+    public void setProductItems(List<ProductItem> productItems) {
         this.productItems = productItems;
     }
 

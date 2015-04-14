@@ -61,7 +61,7 @@ public class Project implements Serializable {
                 @JoinColumn(name = "user_id")})
     private List<User> users;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project")
-    List<Warehouse> warehouses;
+    private List<Warehouse> warehouses;
 
     public Integer getId() {
         return id;
@@ -94,4 +94,18 @@ public class Project implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
+	/**
+	 * @return the warehouses
+	 */
+	public List<Warehouse> getWarehouses() {
+		return warehouses;
+	}
+
+	/**
+	 * @param warehouses the warehouses to set
+	 */
+	public void setWarehouses(List<Warehouse> warehouses) {
+		this.warehouses = warehouses;
+	}
 }

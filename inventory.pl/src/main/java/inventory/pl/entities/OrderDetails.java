@@ -25,7 +25,7 @@ public class OrderDetails implements Serializable {
     private String quantity;
     @OneToOne
     @JoinColumn(name = "item_id")
-    private ProductItems requestItems;
+    private ProductItem requestItems;
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Procurement order;
@@ -46,11 +46,11 @@ public class OrderDetails implements Serializable {
         this.quantity = quantity;
     }
 
-    public ProductItems getRequestItems() {
+    public ProductItem getRequestItems() {
         return requestItems;
     }
 
-    public void setRequestItems(ProductItems requestItems) {
+    public void setRequestItems(ProductItem requestItems) {
         this.requestItems = requestItems;
     }
 

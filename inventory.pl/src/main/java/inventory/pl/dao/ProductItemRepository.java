@@ -6,14 +6,14 @@
 
 package inventory.pl.dao;
 
-import inventory.pl.entities.ProductItems;
+import inventory.pl.entities.ProductItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author ahmed_darweeesh
  */
-public interface ProductItemRepository extends JpaRepository<ProductItems, Long>{
-    public ProductItems findById(long id);
+public interface ProductItemRepository extends JpaRepository<ProductItem, Long>{
+    public ProductItem findById(long id);
     
 }

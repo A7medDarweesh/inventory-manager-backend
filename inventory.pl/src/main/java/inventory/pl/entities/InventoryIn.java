@@ -53,7 +53,7 @@ public class InventoryIn implements Serializable {
         @JoinColumn(name = "move_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "product_id")})
-    private Set<ProductItems> products;
+    private Set<ProductItem> products;
     @OneToOne
     @JoinColumn(name = "from_warehouse")
     Warehouse fromWarehousew;
@@ -93,11 +93,11 @@ public class InventoryIn implements Serializable {
 		this.procurement = procurement;
 	}
 
-	public Set<ProductItems> getProducts() {
+	public Set<ProductItem> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<ProductItems> products) {
+	public void setProducts(Set<ProductItem> products) {
 		this.products = products;
 	}
 

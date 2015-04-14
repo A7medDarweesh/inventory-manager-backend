@@ -21,6 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -30,7 +31,8 @@ import javax.validation.constraints.Size;
  * @author ahmed_darweeesh
  */
 @Entity
-public class ProductItems implements Serializable {
+@Table(name="product_item")
+public class ProductItem implements Serializable {
 
     /**
      *

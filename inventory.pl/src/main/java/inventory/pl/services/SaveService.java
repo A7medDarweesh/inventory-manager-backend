@@ -1,10 +1,15 @@
 package inventory.pl.services;
 
+import java.util.Arrays;
 import java.util.List;
 
+import inventory.pl.entities.NeedsRequest;
 import inventory.pl.entities.Product;
+import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.Project;
+import inventory.pl.entities.RequestDetails;
 import inventory.pl.entities.User;
+import inventory.pl.entities.Warehouse;
 import inventory.pl.services.product.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +27,8 @@ public class SaveService {
 	ProductService productService;
 	@Autowired
 	UserService service;
-	
+	@Autowired
+	WarehousesService warehousesService;
 	public void createProject(Project project){
 		projectsService.save(project);
 	}
@@ -36,6 +42,20 @@ public class SaveService {
 	}
 	public void addProduct(Product product){
 		productService.saveProduct(product);
+	}
+	public void createProject(Project p,Warehouse warehouse){
+		warehousesService.saveWarehouse(warehouse);
+		p.getWarehouses().add(warehouse);
+		projectsService.save(p);
+	}
+	public void createProject(Project p,Warehouse[] warehouse){
+		p.getWarehouses().addAll(Arrays.asList(warehouse));
+		projectsService.save(p);
+	}
+	public void addRequest(NeedsRequest request,ProductItem item,RequestDetails detail){
+		/**
+		 * add test code here
+		 */
 	}
 	
 }

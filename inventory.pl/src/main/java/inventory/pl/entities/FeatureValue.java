@@ -21,7 +21,7 @@ public class FeatureValue implements Serializable {
 	private String value;
 	@ManyToOne
 	@JoinColumn(name = "product_item")
-	private ProductItems productItem;
+	private ProductItem productItem;
 	@ManyToOne
 	@JoinColumn(name = "fet_id")
 	private Features feature;
@@ -37,10 +37,10 @@ public class FeatureValue implements Serializable {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public ProductItems getProductItem() {
+	public ProductItem getProductItem() {
 		return productItem;
 	}
-	public void setProductItem(ProductItems productItem) {
+	public void setProductItem(ProductItem productItem) {
 		this.productItem = productItem;
 	}
 	public Features getFeature() {

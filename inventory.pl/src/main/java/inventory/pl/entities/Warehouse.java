@@ -36,7 +36,7 @@ public class Warehouse implements Serializable{
     @Size(min = 1, max = 255)
     private String name;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "warehouse")
-    private List<ProductItems>items;
+    private List<ProductItem>items;
     @ManyToOne
     @JoinColumn(name="project_id")
     Project project;
@@ -57,11 +57,11 @@ public class Warehouse implements Serializable{
         this.name = name;
     }
 
-    public List<ProductItems> getItems() {
+    public List<ProductItem> getItems() {
         return items;
     }
 
-    public void setItems(List<ProductItems> items) {
+    public void setItems(List<ProductItem> items) {
         this.items = items;
     }
 }

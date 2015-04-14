@@ -10,7 +10,7 @@ import inventory.pl.dao.ProductRepository;
 import inventory.pl.entities.FeatureValue;
 import inventory.pl.entities.Features;
 import inventory.pl.entities.Product;
-import inventory.pl.entities.ProductItems;
+import inventory.pl.entities.ProductItem;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +51,10 @@ public class ProductService {
     public List<Product>getAll(){
         return repository.findAll();
     }
-    public void saveProductItem(ProductItems item){
+    public void saveProductItem(ProductItem item){
         itemsRepository.save(item);
     }
-    public void updateProductItem(ProductItems item){
+    public void updateProductItem(ProductItem item){
         manager.merge(item);
     }
     public List<Features>getProductFeatures(long id){
@@ -63,19 +63,19 @@ public class ProductService {
         System.out.println("size="+fets.size());
         return fets;
     }
-    public List<ProductItems>getProductItems(long id){
+    public List<ProductItem>getProductItems(long id){
         Product p=repository.findOne(id);
-        List<ProductItems>items=p.getProductItems();
+        List<ProductItem>items=p.getProductItems();
         System.out.println(""+items.size());
         return items;
     }
     public List<FeatureValue> getItemValues(long id){
-        ProductItems item=itemsRepository.findOne(id);
+        ProductItem item=itemsRepository.findOne(id);
         List<FeatureValue>vals=item.getFeaturesValues();
         vals.size();
         return vals;
     }
-    public ProductItems getItem(long id){
+    public ProductItem getItem(long id){
         return itemsRepository.findById(id);
     }
 }

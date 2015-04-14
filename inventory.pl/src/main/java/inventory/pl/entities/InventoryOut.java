@@ -47,7 +47,7 @@ public class InventoryOut implements Serializable{
         @JoinColumn(name = "move_id", referencedColumnName = "id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "product_id")})
-    private Set<ProductItems> products;
+    private Set<ProductItem> products;
      @OneToOne
     @JoinColumn(name = "from_warehouse")
     Warehouse fromWarehousew;

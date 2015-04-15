@@ -6,11 +6,13 @@
 package inventory.pl.services.product;
 
 import inventory.pl.dao.ProductItemRepository;
+import inventory.pl.dao.ProductItemSpecsRepository;
 import inventory.pl.dao.ProductRepository;
 import inventory.pl.entities.FeatureValue;
 import inventory.pl.entities.Features;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItem;
+import inventory.pl.entities.ProductItemSpecs;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class ProductService {
     ProductItemRepository itemsRepository;
     @Autowired
     EntityManager manager;
+    @Autowired
+    ProductItemSpecsRepository itemSpecsRepository;
 
     public void saveProduct(Product p) {
         //productDAO.addProduct(p);
@@ -77,5 +81,9 @@ public class ProductService {
     }
     public ProductItem getItem(long id){
         return itemsRepository.findById(id);
+    }
+
+    public void saveProductItemSpecs(ProductItemSpecs item) {
+        itemSpecsRepository.save(item);
     }
 }

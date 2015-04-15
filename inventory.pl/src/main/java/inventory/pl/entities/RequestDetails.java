@@ -34,7 +34,7 @@ public class RequestDetails implements Serializable {
     private String quantity;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "item_id")
-    private ProductItem requestItems;
+    private ProductItemSpecs requestItems;
     @ManyToOne
     @JoinColumn(name = "request_id")
     private NeedsRequest request;
@@ -70,14 +70,14 @@ public class RequestDetails implements Serializable {
     /**
      * @return the requestItems
      */
-    public ProductItem getRequestItems() {
+    public ProductItemSpecs getRequestItems() {
         return requestItems;
     }
 
     /**
      * @param requestItems the requestItems to set
      */
-    public void setRequestItems(ProductItem requestItems) {
+    public void setRequestItems(ProductItemSpecs requestItems) {
         this.requestItems = requestItems;
     }
 

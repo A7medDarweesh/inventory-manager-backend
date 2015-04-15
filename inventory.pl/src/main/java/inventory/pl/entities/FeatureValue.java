@@ -22,6 +22,10 @@ public class FeatureValue implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "product_item")
 	private ProductItem productItem;
+        @ManyToOne
+	@JoinColumn(name = "product_item_spec")
+	private ProductItemSpecs productItemspecs;
+
 	@ManyToOne
 	@JoinColumn(name = "fet_id")
 	private Features feature;
@@ -31,6 +35,14 @@ public class FeatureValue implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
+        
+    public ProductItemSpecs getProductItemspecs() {
+        return productItemspecs;
+    }
+
+    public void setProductItemspecs(ProductItemSpecs productItemspecs) {
+        this.productItemspecs = productItemspecs;
+    }
 	public String getValue() {
 		return value;
 	}

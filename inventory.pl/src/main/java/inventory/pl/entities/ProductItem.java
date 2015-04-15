@@ -64,9 +64,6 @@ public class ProductItem implements Serializable {
     @JoinColumn(name = "warehouse")
     private Warehouse warehouse;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_details_id")
-    private RequestDetails request;
-    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_details_id")
     private OrderDetails order;
 
@@ -134,13 +131,7 @@ public class ProductItem implements Serializable {
         this.warehouse = warehouse;
     }
 
-    public RequestDetails getRequest() {
-        return request;
-    }
-
-    public void setRequest(RequestDetails request) {
-        this.request = request;
-    }
+    
 
     public OrderDetails getOrder() {
         return order;

@@ -6,6 +6,7 @@ import java.util.List;
 import inventory.pl.entities.NeedsRequest;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItem;
+import inventory.pl.entities.ProductItemSpecs;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
 import inventory.pl.entities.User;
@@ -52,10 +53,13 @@ public class SaveService {
 		p.getWarehouses().addAll(Arrays.asList(warehouse));
 		projectsService.save(p);
 	}
-	public void addRequest(NeedsRequest request,ProductItem item,RequestDetails detail){
-		/**
-		 * add test code here
-		 */
+	public void addRequest(NeedsRequest request,List<RequestDetails>requestDetails){
+		request.setProductList(requestDetails);
+		for(RequestDetails detail:requestDetails){
+			detail.setRequest(request);
+			productService.saveProductItemSpecs(detail.getRequestItems());
+		}
+		requestsService.saveRequest(request);
 	}
 	
 }

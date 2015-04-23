@@ -55,10 +55,12 @@ public class SaveService {
 	}
 	public void addRequest(NeedsRequest request,List<RequestDetails>requestDetails){
 		request.setProductList(requestDetails);
-		for(RequestDetails detail:requestDetails){
-			detail.setRequest(request);
-			productService.saveProductItemSpecs(detail.getRequestItems());
-		}
+                requestDetails.stream().map((detail) -> {
+                detail.setRequest(request);
+                return detail;
+            }).forEach((detail) -> {
+                productService.saveProductItemSpecs(detail.getRequestItems());
+            });
 		requestsService.saveRequest(request);
 	}
 	

@@ -25,6 +25,10 @@ public class ServiceManager implements BaseServiceManager,Serializable{
     UserService userService;
     @Autowired
     WarehousesService warehousesService;
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    SaveService saveService;
 
    
     @Override
@@ -40,6 +44,14 @@ public class ServiceManager implements BaseServiceManager,Serializable{
     @Override
     public WarehousesService getwWarehousesService() {
         return warehousesService;
+    }
+
+    public SearchService getSearchService() {
+        return searchService;
+    }
+
+    public SaveService getSaveService() {
+        return saveService;
     }
     
     

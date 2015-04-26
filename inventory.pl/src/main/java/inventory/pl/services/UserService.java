@@ -11,6 +11,7 @@ import inventory.pl.dao.UserRepository;
 import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
 import inventory.pl.exceptions.InvaliDloginEcxeption;
+import inventory.pl.helpers.Encryptor;
 
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     RoleRepostiroy roleRepostiroy;
+    @Autowired
+    Encryptor encryptor;
     public void addUser(User u){
         userRepository.save(u);
     }
@@ -54,10 +57,14 @@ public class UserService {
         }
     }
     public User login(String name,String password) throws InvaliDloginEcxeption{
-    	User loggingUser=userRepository.findByNameAndPassword(name, password);
+    	User loggingUser=userRepository.findByNameAndPassword(name, encryptor.encrypt(password, true));
     	if(loggingUser==null){
     		throw new InvaliDloginEcxeption("User name or password is wrong");
     	}
     	return loggingUser;
+    }
+
+    User getUser(int id) {
+        return userRepository.findOne(id);
     }
 }

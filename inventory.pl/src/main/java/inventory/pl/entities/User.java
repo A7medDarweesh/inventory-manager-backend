@@ -104,19 +104,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    /**
-     * @return the passwrod
-     */
-    public String getPasswrod() {
-        return password;
-    }
-
-    /**
-     * @param passwrod the passwrod to set
-     */
-    public void setPasswrod(String passwrod) {
-        this.password = passwrod;
-    }
+   
 
     public String getPassword() {
         return password;

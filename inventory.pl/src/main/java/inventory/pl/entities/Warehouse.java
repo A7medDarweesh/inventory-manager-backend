@@ -39,7 +39,7 @@ public class Warehouse implements Serializable{
     private List<ProductItem>items;
     @ManyToOne
     @JoinColumn(name="project_id")
-    Project project;
+    private Project project;
 
     public long getId() {
         return id;
@@ -63,5 +63,13 @@ public class Warehouse implements Serializable{
 
     public void setItems(List<ProductItem> items) {
         this.items = items;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

@@ -8,10 +8,12 @@ package inventory.pl.services;
 
 import inventory.pl.dao.RoleRepostiroy;
 import inventory.pl.dao.UserRepository;
+import inventory.pl.entities.Project;
 import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
 import inventory.pl.exceptions.InvaliDloginEcxeption;
 import inventory.pl.helpers.Encryptor;
+import java.util.Arrays;
 
 import java.util.List;
 
@@ -66,5 +68,15 @@ public class UserService {
 
     User getUser(int id) {
         return userRepository.findOne(id);
+    }
+
+    List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    List<Project> getUserProjects(User loggedUser) {
+        User u=userRepository.findOne(loggedUser.getId());
+        System.out.println("n of projects="+u.getProjects().size()+Arrays.toString(Thread.currentThread().getStackTrace()));
+        return u.getProjects();
     }
 }

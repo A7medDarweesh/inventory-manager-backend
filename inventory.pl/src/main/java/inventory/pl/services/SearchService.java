@@ -1,10 +1,14 @@
 package inventory.pl.services;
 
+import inventory.pl.entities.Project;
 import inventory.pl.entities.User;
+import inventory.pl.entities.Warehouse;
 import inventory.pl.exceptions.InvaliDloginEcxeption;
 import inventory.pl.services.product.ProductService;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +29,8 @@ public class SearchService {
     WarehousesService warehousesService;
     @Autowired
     UserService userService;
+    @Autowired
+    EntityManager em;
     public User getUser(int id){
         return userService.getUser(id);
     }
@@ -37,4 +43,17 @@ public class SearchService {
             return null;
         }
     }
+
+    public List<Project> getUserProjects(User loggedUser) {
+       return userService.getUserProjects(loggedUser);
+    }
+
+    public Object getObjectById(Class<Warehouse> aClass, String value) {
+        return em.find(aClass, value);
+    }
+
+    public List<User> getAllusers() {
+        return userService.getAllUsers();
+    }
+
 }

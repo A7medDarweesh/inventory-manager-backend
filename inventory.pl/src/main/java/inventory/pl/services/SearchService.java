@@ -48,8 +48,11 @@ public class SearchService {
        return userService.getUserProjects(loggedUser);
     }
 
-    public Object getObjectById(Class<Warehouse> aClass, String value) {
-        return em.find(aClass, value);
+    public Object getObjectById(Class aClass, Object value) {
+        System.out.println("gettin object for class"+aClass);
+        Object obj = em.find(aClass, value);
+        System.out.println("object ="+obj);
+        return obj;
     }
 
     public List<User> getAllusers() {

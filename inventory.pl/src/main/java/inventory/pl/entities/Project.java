@@ -63,6 +63,8 @@ public class Project implements Serializable {
     private List<User> users;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
     private List<Warehouse> warehouses;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
+    private List<NeedsRequest>requests;
 
     public Integer getId() {
         return id;

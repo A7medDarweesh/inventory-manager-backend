@@ -48,6 +48,10 @@ public class UserService {
         System.out.println(users.size());
         return users;
     }
+    public List<User>getAllUsersInRole(Role role){
+       
+        return userRepository.findAllByRole(role);
+    }
     public Role getRoleByID(long id){
         return roleRepostiroy.findOne(id);
     }

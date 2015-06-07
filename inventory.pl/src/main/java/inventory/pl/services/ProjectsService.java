@@ -8,7 +8,10 @@ package inventory.pl.services;
 
 import inventory.pl.dao.ProjectRepository;
 import inventory.pl.entities.Project;
+import inventory.pl.entities.User;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +35,10 @@ public class ProjectsService {
     }
     public List<Project>listProjects(){
         return repository.findAll();
+    }
+    public void updateProjectUsersList(Project project,List<User>users){
+    	project.setUsers(users);
+    	repository.save(project);
     }
     
 }

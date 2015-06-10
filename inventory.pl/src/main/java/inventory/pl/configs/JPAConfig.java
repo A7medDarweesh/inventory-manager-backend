@@ -1,12 +1,13 @@
 package inventory.pl.configs;
 
 import inventory.pl.services.ServiceManager;
+import java.lang.reflect.Method;
 import java.util.Properties;
-
+import java.util.concurrent.Executor;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -28,7 +32,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaRepositories(basePackages = {"inventory.pl.dao"}, entityManagerFactoryRef = "enityMangerFactory")
 @ComponentScan(basePackages = {"inventory.pl"})
 @PropertySource("file:${user.home}/app.properties")
-public class JPAConfig {
+@EnableAsync
+public class JPAConfig implements AsyncConfigurer{
 
     @Autowired
     Environment env;
@@ -79,5 +84,24 @@ public class JPAConfig {
     @Bean
     public ServiceManager getServiceManager() {
         return new ServiceManager();
+    }
+    @Override
+    public Executor getAsyncExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setMaxPoolSize(10);
+        taskExecutor.setThreadNamePrefix("AsyncExecutor-");
+        taskExecutor.initialize();
+        return taskExecutor;
+    }
+
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return new AsyncUncaughtExceptionHandler() {
+
+            @Override
+            public void handleUncaughtException(Throwable ex, Method method, Object... params) {
+                System.out.println("exeption::"+ex.getMessage());
+            }
+        };
     }
 }

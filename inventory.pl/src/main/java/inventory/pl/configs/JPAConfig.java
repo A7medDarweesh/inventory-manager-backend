@@ -1,17 +1,21 @@
 package inventory.pl.configs;
 
 import inventory.pl.services.ServiceManager;
+
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.MessageSourceResourceBundle;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -33,7 +37,7 @@ public class JPAConfig {
     @Autowired
     Environment env;
 
-    @Bean
+   @Bean
     public LocalContainerEntityManagerFactoryBean enityMangerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         if( !env.getProperty("inventory.datasource.enabled").equals("true")){emf.setDataSource(dataSource());}
@@ -76,8 +80,14 @@ public class JPAConfig {
         return hibernateProperties;
     }
 
-    @Bean
+ @Bean
     public ServiceManager getServiceManager() {
         return new ServiceManager();
+    }
+    @Bean
+    public MessageSource messageSource(){
+    	 ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+         messageSource.setBasename("inventory/pl/messages/messages");
+         return messageSource;
     }
 }

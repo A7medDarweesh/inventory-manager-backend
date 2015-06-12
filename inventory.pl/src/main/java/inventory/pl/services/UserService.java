@@ -60,9 +60,7 @@ public class UserService {
        
         return userRepository.findAllByRole(role);
     }
-   
-
-    public Role getRoleByID(long id) {
+    public Role getRoleByID(long id){
         return roleRepostiroy.findOne(id);
     }
 

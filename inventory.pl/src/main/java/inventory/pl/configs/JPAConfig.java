@@ -13,6 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.support.MessageSourceResourceBundle;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -38,7 +40,7 @@ public class JPAConfig implements AsyncConfigurer{
     @Autowired
     Environment env;
 
-    @Bean
+   @Bean
     public LocalContainerEntityManagerFactoryBean enityMangerFactory() {
         LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
         if( !env.getProperty("inventory.datasource.enabled").equals("true")){emf.setDataSource(dataSource());}
@@ -81,10 +83,15 @@ public class JPAConfig implements AsyncConfigurer{
         return hibernateProperties;
     }
 
-    @Bean
+ @Bean
     public ServiceManager getServiceManager() {
         return new ServiceManager();
     }
+    @Bean
+    public MessageSource messageSource(){
+    	 ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+         messageSource.setBasename("inventory/pl/messages/messages");
+         return messageSource;
     @Override
     public Executor getAsyncExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();

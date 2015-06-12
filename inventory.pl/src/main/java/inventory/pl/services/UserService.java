@@ -10,7 +10,7 @@ import inventory.pl.dao.UserRepository;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
-import inventory.pl.exceptions.InvaliDloginEcxeption;
+import inventory.pl.exceptions.InvalidLoginEcxeption;
 import inventory.pl.helpers.Encryptor;
 import java.util.Arrays;
 
@@ -56,6 +56,11 @@ public class UserService {
         System.out.println(users.size());
         return users;
     }
+    public List<User>getAllUsersInRole(Role role){
+       
+        return userRepository.findAllByRole(role);
+    }
+   
 
     public Role getRoleByID(long id) {
         return roleRepostiroy.findOne(id);
@@ -68,10 +73,10 @@ public class UserService {
         }
     }
 
-    public User login(String name, String password) throws InvaliDloginEcxeption {
+    public User login(String name, String password) throws InvalidLoginEcxeption {
         User loggingUser = userRepository.findByNameAndPassword(name, encryptor.encrypt(password, true));
         if (loggingUser == null) {
-            throw new InvaliDloginEcxeption("User name or password is wrong");
+            throw new InvalidLoginEcxeption("User name or password is wrong");
         }
         return loggingUser;
     }

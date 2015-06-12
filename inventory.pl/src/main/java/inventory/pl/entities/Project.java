@@ -54,7 +54,7 @@ public class Project implements Serializable {
     @Size(min = 1, max = 65535)
     @Column(name = "description")
     private String description;
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "users_porjects_xref",
             joinColumns = {
                 @JoinColumn(name = "project_id")},
@@ -63,6 +63,8 @@ public class Project implements Serializable {
     private List<User> users;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
     private List<Warehouse> warehouses;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
+    private List<NeedsRequest>requests;
 
     public Integer getId() {
         return id;

@@ -3,7 +3,7 @@ package inventory.pl.services;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
-import inventory.pl.exceptions.InvaliDloginEcxeption;
+import inventory.pl.exceptions.InvalidLoginEcxeption;
 import inventory.pl.services.product.ProductService;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +38,7 @@ public class SearchService {
     public User login(String userName,String password) {
         try {
             return userService.login(userName, password);
-        } catch (InvaliDloginEcxeption ex) {
+        } catch (InvalidLoginEcxeption ex) {
             Logger.getLogger(SearchService.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }

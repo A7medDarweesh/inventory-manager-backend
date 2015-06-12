@@ -7,7 +7,7 @@ package inventory.pl.services;
 
 import inventory.pl.configs.JPAConfig;
 import inventory.pl.entities.User;
-import inventory.pl.exceptions.InvaliDloginEcxeption;
+import inventory.pl.exceptions.InvalidLoginEcxeption;
 import inventory.pl.helpers.Encryptor;
 import inventory.pl.services.product.ProductService;
 import java.util.Date;
@@ -98,7 +98,7 @@ public class InventoryOperationsTest {
         User testUser = null;
         try {
             testUser = userService.login("loli", "123!@#");
-        } catch (InvaliDloginEcxeption ex) {
+        } catch (InvalidLoginEcxeption ex) {
             Logger.getLogger(InventoryOperationsTest.class.getName()).log(Level.SEVERE, null, ex);
         }
          assertNotNull(testUser);

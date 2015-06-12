@@ -6,8 +6,11 @@
 
 package inventory.pl.dao;
 
+import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
+
 import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -16,5 +19,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
     public List<User>findAllByName(String name);
+    public List<User>findAllByRole(Role role);
     public User findByNameAndPassword(String name,String password);
 }

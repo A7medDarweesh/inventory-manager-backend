@@ -1,17 +1,21 @@
 package inventory.pl.configs;
 
 import inventory.pl.services.ServiceManager;
+
 import java.lang.reflect.Method;
 import java.util.Properties;
 import java.util.concurrent.Executor;
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.MessageSourceResourceBundle;
@@ -36,6 +40,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan(basePackages = {"inventory.pl"})
 @PropertySource("file:${user.home}/app.properties")
 @EnableAsync
+@EnableAspectJAutoProxy
 public class JPAConfig implements AsyncConfigurer{
 
     @Autowired

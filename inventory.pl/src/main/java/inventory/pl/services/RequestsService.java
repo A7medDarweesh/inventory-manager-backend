@@ -6,11 +6,16 @@
 
 package inventory.pl.services;
 
+import java.util.List;
+
 import inventory.pl.dao.OrderRepository;
 import inventory.pl.dao.ProductItemRepository;
 import inventory.pl.dao.RequestDetailsRepository;
 import inventory.pl.entities.NeedsRequest;
+import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
+import inventory.pl.entities.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,5 +40,12 @@ public class RequestsService {
     public void saveDetail(RequestDetails details){
         detailsRepository.save(details);
     }
-    
+	public List<NeedsRequest> getAllRequests() {
+		// TODO Auto-generated method stub
+		return requestrRepository.findAll();
+	}
+	public List<NeedsRequest> getAllRequestsForUser(User user) {
+		// TODO Auto-generated method stub
+		return requestrRepository.getRequestsByProject((Project[])user.getProjects().toArray());
+	}
 }

@@ -1,14 +1,18 @@
 package inventory.pl.services;
 
+import inventory.pl.entities.NeedsRequest;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
 import inventory.pl.exceptions.InvalidLoginEcxeption;
 import inventory.pl.services.product.ProductService;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,4 +63,12 @@ public class SearchService {
         return userService.getAllUsers();
     }
 
+	public List<NeedsRequest> getAllRequests() {
+		// TODO Auto-generated method stub
+		return requestsService.getAllRequests();
+	}
+	public List<NeedsRequest> getAllRequestsForUser(User user) {
+		// TODO Auto-generated method stub
+		return requestsService.getAllRequests();
+	}
 }

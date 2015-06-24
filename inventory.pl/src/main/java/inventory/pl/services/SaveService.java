@@ -74,4 +74,11 @@ public class SaveService {
         requestsService.saveRequest(request);
     }
 
+	public void addRequest(Project projectToAddRequestTo) {
+		NeedsRequest request=new NeedsRequest();
+		request.setProject(projectToAddRequestTo);
+		requestsService.saveRequest(request);
+		
+	}
+
 }

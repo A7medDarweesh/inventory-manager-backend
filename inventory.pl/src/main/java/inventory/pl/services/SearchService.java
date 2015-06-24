@@ -69,6 +69,6 @@ public class SearchService {
 	}
 	public List<NeedsRequest> getAllRequestsForUser(User user) {
 		// TODO Auto-generated method stub
-		return requestsService.getAllRequests();
+		return requestsService.getAllRequestsForUser(user);
 	}
 }

@@ -81,4 +81,9 @@ public class Features implements Serializable {
 		this.featureValues = featureValues;
 	}
 
+    @Override
+    public String toString() {
+        return "Features{" + "name=" + name + ", type=" + type + ", product=" + product + '}';
+    }
+
 }

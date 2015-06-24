@@ -24,7 +24,7 @@ public void checkBefore(ProceedingJoinPoint  jp){
 			e.printStackTrace();
 		}
 	}else{
-		System.out.println("Value not found, returning");
+		System.out.println("Value not found,  found:"+loggable.value());
 	}
 
 	

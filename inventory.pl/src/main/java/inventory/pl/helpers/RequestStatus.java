@@ -11,5 +11,5 @@ package inventory.pl.helpers;
  * @author ahmed_darweeesh
  */
 public enum RequestStatus {
-    DONE,PENDING,REJECTED
+    DONE,PENDING,REJECTED,UNDER_REVIEW
 }

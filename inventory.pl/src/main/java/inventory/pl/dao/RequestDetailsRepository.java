@@ -13,6 +13,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  *
  * @author ahmed_darweeesh
  */
-public interface RequestDetailsRepository extends JpaRepository<RequestDetails, Long>{
+public interface RequestDetailsRepository extends JpaRepository<RequestDetails, Integer>{
     
 }

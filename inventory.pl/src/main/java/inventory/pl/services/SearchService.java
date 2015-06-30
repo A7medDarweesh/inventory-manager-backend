@@ -1,7 +1,11 @@
 package inventory.pl.services;
 
+import inventory.pl.entities.FeatureValue;
+import inventory.pl.entities.Features;
 import inventory.pl.entities.NeedsRequest;
+import inventory.pl.entities.Product;
 import inventory.pl.entities.Project;
+import inventory.pl.entities.RequestDetails;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
 import inventory.pl.exceptions.InvalidLoginEcxeption;
@@ -71,4 +75,21 @@ public class SearchService {
 		// TODO Auto-generated method stub
 		return requestsService.getAllRequestsForUser(user);
 	}
+        public List<Features>getProductFeatures(long id){
+            return productService.getProductFeatures(id);
+        }
+
+    public List<Product> getAllProducts() {
+       return productService.getAll();
+    }
+
+    public List<RequestDetails> getAllRequestDetails(Long id) {
+        
+        return requestsService.getAllRequestDetails(id);
+    }
+
+    public List<FeatureValue> getItemValues(int id) {
+        List<FeatureValue> values = requestsService.getFeatureValuesForItemSpecs(id);
+        return values;
+    }
 }

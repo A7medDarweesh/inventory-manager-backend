@@ -7,7 +7,7 @@ package inventory.pl.entities;
 
 import java.io.Serializable;
 import java.util.List;
-
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +22,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -48,21 +49,45 @@ public class Project implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "name")
     private String name;
+
     @Basic(optional = false)
     @NotNull
     @Lob
     @Size(min = 1, max = 65535)
     @Column(name = "description")
     private String description;
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "users_porjects_xref",
             joinColumns = {
                 @JoinColumn(name = "project_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "user_id")})
     private List<User> users;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
-    private List<Warehouse> warehouses;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "warehouse_id")
+    private Warehouse warehouses;
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Project other = (Project) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project",fetch = FetchType.EAGER)
     private List<NeedsRequest>requests;
 
@@ -101,14 +126,14 @@ public class Project implements Serializable {
 	/**
 	 * @return the warehouses
 	 */
-	public List<Warehouse> getWarehouses() {
+	public Warehouse getWarehouses() {
 		return warehouses;
 	}
 
 	/**
 	 * @param warehouses the warehouses to set
 	 */
-	public void setWarehouses(List<Warehouse> warehouses) {
+	public void setWarehouses(Warehouse warehouses) {
 		this.warehouses = warehouses;
 	}
 }

@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ public class ProductItemSpecs implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product")
     private Product product;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productItemspecs")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productItemspecs",fetch = FetchType.EAGER)
     private List<FeatureValue> featuresValues;
 
     public long getId() {

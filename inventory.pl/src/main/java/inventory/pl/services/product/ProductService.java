@@ -86,4 +86,6 @@ public class ProductService {
     public void saveProductItemSpecs(ProductItemSpecs item) {
         itemSpecsRepository.save(item);
     }
+
+    
 }

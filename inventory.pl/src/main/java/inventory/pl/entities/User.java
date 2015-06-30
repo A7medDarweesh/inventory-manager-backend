@@ -125,8 +125,8 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -144,5 +144,9 @@ public class User implements Serializable {
         }
         return true;
     }
+
+    
+
+    
 
 }

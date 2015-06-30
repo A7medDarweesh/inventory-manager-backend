@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -37,7 +38,7 @@ public class Warehouse implements Serializable{
     private String name;
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "warehouse")
     private List<ProductItem>items;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="project_id")
     private Project project;
 

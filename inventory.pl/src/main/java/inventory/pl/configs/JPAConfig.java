@@ -37,8 +37,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = {"inventory.pl.dao"}, entityManagerFactoryRef = "enityMangerFactory")
-@ComponentScan(basePackages = {"inventory.pl"})
-@PropertySource("file:${user.home}/app.properties")
+@ComponentScan(basePackages = {"inventory.pl","inventory.frontend"})
+@PropertySource("file:D:/config/app.properties")
 @EnableAsync
 @EnableAspectJAutoProxy
 public class JPAConfig implements AsyncConfigurer{

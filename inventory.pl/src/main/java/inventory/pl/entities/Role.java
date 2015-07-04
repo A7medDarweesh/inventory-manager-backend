@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package inventory.pl.entities;
 
 import java.io.Serializable;
@@ -25,19 +24,22 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6281379745817031535L;
-	@Id
+     *
+     */
+    private static final long serialVersionUID = 6281379745817031535L;
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     long id;
     @Column(name = "role_name")
     String roleName;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "role")
-    List<User>users;
+    @Column(name = "permissions")
+    private String permissions;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    List<User> users;
 
     public long getId() {
         return id;
@@ -62,5 +64,13 @@ public class Role implements Serializable {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-    
+
+    public String getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(String permissions) {
+        this.permissions = permissions;
+    }
+
 }

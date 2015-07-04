@@ -11,6 +11,7 @@ import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
+import inventory.pl.helpers.Encryptor;
 import inventory.pl.helpers.RequestStatus;
 import inventory.pl.services.product.ProductService;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class SaveService {
     UserService service;
     @Autowired
     WarehousesService warehousesService;
+    @Autowired
+    Encryptor encryptor;
 
     public void createProject(Project project) {
         projectsService.save(project);
@@ -42,6 +45,7 @@ public class SaveService {
     public void createProject(Project project, List<User> users, Warehouse warehouse) {
         projectsService.save(project);
         project.setWarehouses(warehouse);
+        warehouse.setProject(project);
         updateProjectUserList(project, users);
     }
 
@@ -92,6 +96,18 @@ public class SaveService {
         warehouse.setProject(project);
         project.setWarehouses(warehouse);
         updateProjectUserList(project, users);
+    }
+
+    public void addUser(String userName, String password) {
+         User newUser=new User();
+        newUser.setJoinDate(new Date());
+        newUser.setName(userName);
+        newUser.setPassword(encryptor.encrypt(password, true));
+        service.addUser(newUser);
+    }
+
+    public void saveProductItem(ProductItem item) {
+        productService.saveProductItem(item);
     }
 
 }

@@ -63,9 +63,7 @@ public class ProductItem implements Serializable {
     @ManyToOne
     @JoinColumn(name = "warehouse")
     private Warehouse warehouse;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_details_id")
-    private OrderDetails order;
+    
 
     public List<FeatureValue> getFeaturesValues() {
         return featuresValues;
@@ -131,14 +129,5 @@ public class ProductItem implements Serializable {
         this.warehouse = warehouse;
     }
 
-    
-
-    public OrderDetails getOrder() {
-        return order;
-    }
-
-    public void setOrder(OrderDetails order) {
-        this.order = order;
-    }
 
 }

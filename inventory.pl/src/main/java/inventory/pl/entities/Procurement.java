@@ -1,5 +1,6 @@
 package inventory.pl.entities;
 
+import inventory.pl.helpers.RequestStatus;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -31,18 +30,13 @@ public class Procurement implements Serializable {
     @Column(name = "added_date")
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date addingDate;
-    @ManyToMany
-    @JoinTable(name = "procurement_product_xref",
-            joinColumns = {
-                @JoinColumn(name = "procurement_id")},
-            inverseJoinColumns = {
-                @JoinColumn(name = "product_id")})
-    private List<Product> products;
-    @OneToOne
-    @JoinColumn(name = "request_id")
-    private NeedsRequest request;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    List<OrderDetails> details;
+    @Column(name = "status")
+    private RequestStatus requestStatus;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "buyOrder")
+    private List<RequestDetails> procrumentProducts;
 
     public long getId() {
         return id;
@@ -60,20 +54,31 @@ public class Procurement implements Serializable {
         this.addingDate = addingDate;
     }
 
-    public NeedsRequest getRequest() {
-        return request;
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
     }
 
-    public void setRequest(NeedsRequest request) {
-        this.request = request;
+    public void setRequestStatus(RequestStatus requestStatus) {
+        this.requestStatus = requestStatus;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<RequestDetails> getProducts() {
+        return procrumentProducts;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProducts(List<RequestDetails> products) {
+        this.procrumentProducts = products;
     }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+   
+
 
 }

@@ -57,6 +57,14 @@ public class User implements Serializable {
             inverseJoinColumns = {
                 @JoinColumn(name = "project_id")})
     private List<Project> projects;
+
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+    public User(){
+        
+    }
     @ManyToMany
     @JoinTable(name = "requests_watchers",
             joinColumns = {

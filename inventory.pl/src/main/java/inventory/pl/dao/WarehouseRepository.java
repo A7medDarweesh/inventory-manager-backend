@@ -6,14 +6,19 @@
 
 package inventory.pl.dao;
 
-import inventory.pl.entities.Product;
+import inventory.pl.entities.Project;
 import inventory.pl.entities.Warehouse;
+import java.util.List;
+import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
  * @author ahmed_darweeesh
  */
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
-    
+    @Query("select n from Warehouse n where n.project in :ids")
+	    List<Warehouse> getUserWarehouses(@Param("ids") Set<Project>ids);
 }

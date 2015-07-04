@@ -9,6 +9,7 @@ package inventory.pl.services;
 import inventory.pl.dao.ProjectRepository;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.User;
+import inventory.pl.entities.Warehouse;
 
 import java.util.List;
 
@@ -39,6 +40,10 @@ public class ProjectsService {
     public void updateProjectUsersList(Project project,List<User>users){
     	project.setUsers(users);
     	repository.save(project);
+    }
+
+    List<Warehouse> findAllWarehousesforUser(User loggedUser) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -38,6 +38,9 @@ public class RequestDetails implements Serializable {
     @ManyToOne
     @JoinColumn(name = "request_id")
     private NeedsRequest request;
+     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "procurment_id")
+    private Procurement buyOrder;
 
     /**
      * @return the id
@@ -129,6 +132,14 @@ public class RequestDetails implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public Procurement getBuyOrder() {
+        return buyOrder;
+    }
+
+    public void setBuyOrder(Procurement buyOrder) {
+        this.buyOrder = buyOrder;
     }
 
 }

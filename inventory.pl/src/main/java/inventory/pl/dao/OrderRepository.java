@@ -21,5 +21,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface OrderRepository extends JpaRepository<NeedsRequest, Long> {
 	 @Query("select n from NeedsRequest n where n.project in(?1)")
 	    List<NeedsRequest> getRequestsByProject(Project[]projects);
+            @Query("select n from NeedsRequest n JOIN FETCH n.products where n.id=?1")
+	    NeedsRequest getRequestsWithDetails(long id);
     
 }

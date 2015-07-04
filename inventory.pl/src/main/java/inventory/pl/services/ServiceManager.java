@@ -17,8 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class ServiceManager implements BaseServiceManager,Serializable{
     
-    @Autowired
-    BuyOrderService buyOrderSrervice;
+    
     @Autowired
     ProductService productService;
     @Autowired
@@ -31,10 +30,7 @@ public class ServiceManager implements BaseServiceManager,Serializable{
     SaveService saveService;
 
    
-    @Override
-    public BuyOrderService getBuyOrderSrervice() {
-        return buyOrderSrervice;
-    }
+   
 
     @Override
     public ProductService getProductService() {

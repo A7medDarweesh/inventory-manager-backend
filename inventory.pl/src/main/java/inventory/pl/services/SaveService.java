@@ -9,11 +9,13 @@ import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.ProductItemSpecs;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
+import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
 import inventory.pl.helpers.Encryptor;
 import inventory.pl.helpers.RequestStatus;
 import inventory.pl.services.product.ProductService;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -109,5 +111,10 @@ public class SaveService {
     public void saveProductItem(ProductItem item) {
         productService.saveProductItem(item);
     }
+
+	public void saveRole(Role r) {
+		service.addRole(r);
+		
+	}
 
 }

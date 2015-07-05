@@ -7,6 +7,7 @@ import inventory.pl.entities.NeedsRequest;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
+import inventory.pl.entities.Role;
 import inventory.pl.entities.User;
 import inventory.pl.entities.Warehouse;
 import inventory.pl.exceptions.InvalidLoginEcxeption;
@@ -108,4 +109,8 @@ public class SearchService {
     public List<Warehouse> getAllWarehouses(User loggedUser) {
         return warehousesService.findAllWarehousesforUser(getUserProjects(loggedUser));
     }
+
+	public List<Role> getAllRoles() {
+		return userService.getAllRoles();
+	}
 }

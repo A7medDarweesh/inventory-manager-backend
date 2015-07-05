@@ -125,4 +125,8 @@ public class UserService {
 
         return null;
     }
+
+	public List<Role> getAllRoles() {
+		return roleRepostiroy.findAll();
+	}
 }

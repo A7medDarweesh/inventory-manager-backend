@@ -127,6 +127,13 @@ public class UserService {
     }
 
 	public List<Role> getAllRoles() {
-		return roleRepostiroy.findAll();
+		return roleRepostiroy.findAllAndFetchRolesEagerly();
 	}
+        public List<Role>getAvailableRoles(){
+            return roleRepostiroy.findAll();
+        }
+
+    void deleteUser(User u) {
+        userRepository.delete(u);
+    }
 }

@@ -13,6 +13,7 @@ import inventory.pl.entities.Features;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.ProductItemSpecs;
+import inventory.pl.entities.Warehouse;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +86,14 @@ public class ProductService {
 
     public void saveProductItemSpecs(ProductItemSpecs item) {
         itemSpecsRepository.save(item);
+    }
+
+    public List<ProductItem> findItemsInWarehouse(Warehouse selectedWarehouse) {
+        return itemsRepository.findByWarehouse(selectedWarehouse);
+    }
+
+    public void transferItems(List<ProductItem> selectedItems) {
+        itemsRepository.save(selectedItems);
     }
 
     

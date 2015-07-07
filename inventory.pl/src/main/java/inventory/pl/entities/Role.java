@@ -14,8 +14,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -36,6 +38,8 @@ public class Role implements Serializable {
     long id;
     @Column(name = "role_name")
     String roleName;
+    @Lob
+    @Size(min = 1, max = 65535)
     @Column(name = "permissions")
     private String permissions;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
@@ -71,6 +75,28 @@ public class Role implements Serializable {
 
     public void setPermissions(String permissions) {
         this.permissions = permissions;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + (int) (this.id ^ (this.id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Role other = (Role) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
 
 }

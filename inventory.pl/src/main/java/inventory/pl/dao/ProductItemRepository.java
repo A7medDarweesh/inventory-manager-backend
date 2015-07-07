@@ -7,6 +7,8 @@
 package inventory.pl.dao;
 
 import inventory.pl.entities.ProductItem;
+import inventory.pl.entities.Warehouse;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -15,5 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ProductItemRepository extends JpaRepository<ProductItem, Long>{
     public ProductItem findById(long id);
+    public List<ProductItem> findByWarehouse(Warehouse warehouse);
     
 }

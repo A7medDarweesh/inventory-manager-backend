@@ -35,13 +35,13 @@ public class BuyOrdersService {
     
     public void save(Procurement order,List<RequestDetails>products){
         Set<Integer>ids=new HashSet<>();
-        for(RequestDetails detail:products){
+        products.stream().forEach((detail) -> {
             ids.add(detail.getId());
-        }
+        });
         List<RequestDetails>productz=detailsRepository.getRequestDetailsInIds(ids);
-        for(RequestDetails d:productz){
+        productz.stream().forEach((d) -> {
             d.setBuyOrder(order);
-        }
+        });
         order.setProducts(productz);
         orderRepository.save(order);
 //        for(RequestDetails detail:reqeust.getProductList()){

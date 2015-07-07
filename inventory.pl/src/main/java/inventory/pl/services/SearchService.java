@@ -5,6 +5,7 @@ import inventory.pl.entities.FeatureValue;
 import inventory.pl.entities.Features;
 import inventory.pl.entities.NeedsRequest;
 import inventory.pl.entities.Product;
+import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.Project;
 import inventory.pl.entities.RequestDetails;
 import inventory.pl.entities.Role;
@@ -113,4 +114,11 @@ public class SearchService {
 	public List<Role> getAllRoles() {
 		return userService.getAllRoles();
 	}
+        public List<Role>getAvailableRoles(){
+            return userService.getAvailableRoles();
+        }
+
+    public List<ProductItem> findItemsInWarehouse(Warehouse selectedWarehouse) {
+        return productService.findItemsInWarehouse(selectedWarehouse);
+    }
 }

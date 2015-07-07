@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import inventory.pl.entities.NeedsRequest;
+import inventory.pl.entities.Procurement;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.ProductItemSpecs;
@@ -39,6 +40,10 @@ public class SaveService {
     WarehousesService warehousesService;
     @Autowired
     Encryptor encryptor;
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    ProcrumentService procrumentService;
 
     public void createProject(Project project) {
         projectsService.save(project);
@@ -117,4 +122,23 @@ public class SaveService {
 		
 	}
 
+    public void addUser(String userName, String password, Role selectedRole) {
+       User newUser=new User();
+        newUser.setJoinDate(new Date());
+        newUser.setName(userName);
+        newUser.setPassword(encryptor.encrypt(password, true));
+        newUser.setRole(selectedRole);
+        service.addUser(newUser);}
+
+    public void deleteUser(User u) {
+        service.deleteUser(u);
+    }
+
+    public void transferItems(List<ProductItem> selectedItems) {
+        productService.transferItems(selectedItems);
+    }
+public void saveProcurmentDetails(Procurement proc){
+    List<RequestDetails>products = searchService.findProductsInRequest(1l);
+        procrumentService.saveProcurement(proc, products);
+}
 }

@@ -53,7 +53,7 @@ public class RequestsService {
         if (user.getName().equals("A7MED") && user.getPassword().equals("A7MED")) {
             return requestsRepository.findAll();
         }
-        return requestsRepository.getRequestsByProject((Project[]) user.getProjects().toArray());
+        return requestsRepository.getRequestsByProject(user.getProjects());
     }
 
     List<RequestDetails> getAllRequestDetails(Long id) {

@@ -19,4 +19,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface RoleRepostiroy extends JpaRepository<Role, Long>{
     @Query("SELECT p FROM Role p JOIN FETCH p.users WHERE p.id = ?1")
     public Role findByIdAndFetchRolesEagerly(long id);
+    @Query("SELECT p FROM Role p JOIN FETCH p.users")
+    public List<Role> findAllAndFetchRolesEagerly();
 }

@@ -4,6 +4,7 @@ import inventory.pl.dao.OrderRepository;
 import inventory.pl.entities.FeatureValue;
 import inventory.pl.entities.Features;
 import inventory.pl.entities.NeedsRequest;
+import inventory.pl.entities.Procurement;
 import inventory.pl.entities.Product;
 import inventory.pl.entities.ProductItem;
 import inventory.pl.entities.Project;
@@ -42,6 +43,8 @@ public class SearchService {
     UserService userService;
     @Autowired
     EntityManager em;
+    @Autowired
+    ProcrumentService procrumentService;
     public User getUser(int id){
         return userService.getUser(id);
     }
@@ -121,4 +124,9 @@ public class SearchService {
     public List<ProductItem> findItemsInWarehouse(Warehouse selectedWarehouse) {
         return productService.findItemsInWarehouse(selectedWarehouse);
     }
+
+	public List<Procurement> getuserProcurements(User currentUser) {
+		// TODO Auto-generated method stub
+		return procrumentService.getAllRequestsForUser(currentUser);
+	}
 }

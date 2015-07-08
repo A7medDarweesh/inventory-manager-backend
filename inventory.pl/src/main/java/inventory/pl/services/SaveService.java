@@ -141,4 +141,7 @@ public void saveProcurmentDetails(Procurement proc){
     List<RequestDetails>products = searchService.findProductsInRequest(1l);
         procrumentService.saveProcurement(proc, products);
 }
+public void saveProcurement(Procurement p){
+	procrumentService.saveProcurement(p);
+}
 }

@@ -12,6 +12,8 @@ import inventory.pl.entities.User;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -21,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     public List<User>findAllByName(String name);
     public List<User>findAllByRole(Role role);
     public User findByNameAndPassword(String name,String password);
+    @Query("Select u from User u Join Fetch u.projects where u.id=:id")
+    public User getUserWithProjects(@Param("id")Integer id);
+    
 }

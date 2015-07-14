@@ -17,7 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-
+/**
+ * Class procuremetn represents procurements orders made by users
+ * @author ahmed_darweeesh
+ */
 @Entity
 @Table(name = "procurement")
 public class Procurement implements Serializable {

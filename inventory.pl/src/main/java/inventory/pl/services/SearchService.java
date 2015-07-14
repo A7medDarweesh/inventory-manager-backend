@@ -127,6 +127,7 @@ public class SearchService {
 
 	public List<Procurement> getuserProcurements(User currentUser) {
 		// TODO Auto-generated method stub
+            currentUser=userService.getUserWithProjects(currentUser.getId());
 		return procrumentService.getAllRequestsForUser(currentUser);
 	}
 }

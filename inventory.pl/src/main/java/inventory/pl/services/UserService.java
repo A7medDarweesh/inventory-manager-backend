@@ -136,4 +136,8 @@ public class UserService {
     void deleteUser(User u) {
         userRepository.delete(u);
     }
+
+    User getUserWithProjects(Integer id) {
+        return userRepository.getUserWithProjects(id);
+    }
 }

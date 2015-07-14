@@ -51,6 +51,8 @@ public class ProductItem implements Serializable {
     @Column(name = "creation_date")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date creationeDate;
+    @Column(name = "amount")
+    private double amount;
     @ManyToOne
     @JoinColumn(name = "product")
     private Product product;

@@ -17,4 +17,14 @@ public List<String> testAspect2(){
 		s.add("s"+i);
 		return s;
 }
+	@Loggable(value="proceed")
+	public void testAspect3(String string, String string2, AspectBean bean) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "aspect beaqn impl";
+	} 
 }

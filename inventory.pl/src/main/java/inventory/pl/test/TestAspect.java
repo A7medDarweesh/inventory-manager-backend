@@ -1,5 +1,7 @@
 package inventory.pl.test;
 
+import java.util.Arrays;
+
 import inventory.pl.configs.MainApp;
 
 import org.aspectj.lang.JoinPoint;
@@ -19,10 +21,12 @@ public class TestAspect {
 @Around(" @annotation(Loggable)")
 public void checkBefore(ProceedingJoinPoint  jp){
 	 MethodSignature signature = (MethodSignature) jp.getSignature();
-	 Class c = signature.getReturnType();
 	Loggable loggable=signature.getMethod().getAnnotation(Loggable.class);
 	if(loggable.value().equalsIgnoreCase("proceed")){
 		LOG.info("parameter is correct for method {}, prooceding",signature.getName());
+		if(signature.getParameterNames().length>0){
+			LOG.info("parameter values  for method {}, is {}",signature.toLongString(),Arrays.deepToString(jp.getArgs()));
+		}
 		try {
 			Object returnValue=jp.proceed();
 			LOG.info("Return value from method:"+signature.getName()+"is:"+returnValue);

@@ -7,8 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AspectBean {
-	@Loggable(value="dont")
+	@Loggable(value="proceed")
 public void testAspect(){
+		int c=4/0;
 }
 	@Loggable(value="proceed")
 public List<String> testAspect2(){

@@ -34,6 +34,7 @@ public void checkBefore(ProceedingJoinPoint  jp){
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			LOG.error("Exception happened while executing  method {}, stack trace is {}",signature.toLongString(),e);
 		}
 	}else{
 		LOG.error("wron parameter for method:"+signature.getName()+",");
